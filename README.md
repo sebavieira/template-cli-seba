@@ -232,6 +232,5 @@ Para melhorar este template:
 
 ---
 
-**Criado com base no projeto:** Agente de Prospecção Multicanal
 **Versão:** 1.0.0
 **Data:** 2026-01-19
