@@ -1,7 +1,7 @@
 # 5. Requisitos Não Funcionais
 
 **Versão:** 1.0.0
-**Última Atualização:** {{DATA}}
+**Última Atualização:** 2026-01-19
 
 [← Voltar para Índice PRD](README.md)
 
@@ -15,10 +15,14 @@
 - Tempo de resposta da API: **p95 < 200ms**
 - Tempo de carregamento de página: **< 3 segundos**
 - Operações em lote: **< 30 segundos**
+- Processamento de mensagem IA: **< 10 segundos**
 
 **Medição:**
-- Monitoramento via APM (ex: DataDog, New Relic)
+- Logs estruturados com Pino
+- Monitoramento de latência por endpoint
 - Alertas para degradação de performance
+
+**Status:** ✅ Implementado
 
 ---
 
@@ -27,14 +31,18 @@
 **Requisito:** O sistema deve suportar crescimento de usuários e dados.
 
 **Critérios:**
-- Suportar **{{USUARIOS_SIMULTANEOS}}** usuários simultâneos
-- Suportar **{{REGISTROS}}** registros no banco de dados
-- Horizontal scaling quando necessário
+- Suportar **500** usuários simultâneos por servidor
+- Suportar **1 milhão** de mensagens no banco
+- Suportar **50.000** contatos por empresa
+- Horizontal scaling via Docker containers
 
 **Estratégia:**
-- Arquitetura stateless
-- Banco de dados com índices otimizados
-- Cache para dados frequentes
+- Arquitetura stateless (exceto Redis para sessões)
+- Banco de dados PostgreSQL com índices otimizados
+- Redis para cache e filas (BullMQ)
+- Workers background para processamento assíncrono
+
+**Status:** ✅ Implementado
 
 ---
 
@@ -43,14 +51,17 @@
 **Requisito:** O sistema deve estar disponível para uso.
 
 **Critérios:**
-- Uptime: **{{UPTIME}}** (ex: 99.9%)
-- Tempo máximo de downtime: **{{MAX_DOWNTIME}}** por mês
+- Uptime: **99.5%** (meta inicial)
+- Tempo máximo de downtime: **3.6 horas** por mês
 - Recuperação de falhas: **< 15 minutos**
 
 **Estratégia:**
-- Monitoramento contínuo
-- Health checks automatizados
-- Procedimentos de DR documentados
+- Health checks em `/health`
+- Docker Compose com restart policies
+- Logs centralizados para diagnóstico
+- Procedures de rollback documentados
+
+**Status:** ✅ Implementado
 
 ---
 
@@ -59,35 +70,40 @@
 **Requisito:** O sistema deve proteger dados e prevenir acessos não autorizados.
 
 **Critérios:**
-- Autenticação via **JWT** ou similar
-- Dados sensíveis criptografados em repouso e trânsito
+- Autenticação via **JWT** com refresh tokens
+- Dados sensíveis criptografados em trânsito (HTTPS)
+- Senhas com hash bcrypt (10 rounds)
+- Rate limiting: 100 requests/minuto por IP
 - Proteção contra OWASP Top 10
-- Rate limiting para prevenir abuse
 
 **Implementação:**
-- HTTPS obrigatório
-- Senhas com hash bcrypt (min 12 rounds)
-- Tokens com expiração curta
-- Logs de auditoria
+- Helmet para headers de segurança
+- CORS configurado por ambiente
+- API keys para integrações
+- Validação de input com Zod
+- Logs de auditoria para ações sensíveis
+
+**Status:** ✅ Implementado
 
 ---
 
-## RNF-05: Compliance
+## RNF-05: Compliance (LGPD)
 
-**Requisito:** O sistema deve estar em conformidade com regulamentações aplicáveis.
+**Requisito:** O sistema deve estar em conformidade com a LGPD.
 
 **Critérios:**
-{{#se aplicável}}
-- **LGPD:** Consentimento, direito ao esquecimento, portabilidade
-- **GDPR:** (se aplicável internacionalmente)
-- **PCI-DSS:** (se processar pagamentos)
-{{/se}}
+- Consentimento explícito para uso de dados
+- Direito ao esquecimento (exclusão de dados)
+- Portabilidade de dados (exportação)
+- Transparência no uso de dados
 
 **Implementação:**
-- Política de privacidade clara
-- Mecanismo de opt-out
-- Retenção de dados definida
-- Processo de exclusão de dados
+- Política de privacidade no frontend
+- Endpoint para solicitação de exclusão de dados
+- Logs de consentimento
+- Retenção de dados definida (arquivos antigos podem ser limpos)
+
+**Status:** 🚧 Parcialmente implementado
 
 ---
 
@@ -96,31 +112,37 @@
 **Requisito:** O sistema deve ser monitorável e debuggável.
 
 **Critérios:**
-- Logs estruturados em JSON
+- Logs estruturados em JSON (Pino)
 - Métricas de negócio e técnicas
-- Tracing distribuído
-- Alertas para anomalias
+- Request IDs para tracing
+- Alertas para erros críticos
 
-**Ferramentas Sugeridas:**
-- Logs: ELK Stack, CloudWatch, ou Loki
-- Métricas: Prometheus + Grafana
-- APM: DataDog, New Relic, ou Jaeger
+**Implementação:**
+- Pino logger com níveis configuráveis
+- Swagger/OpenAPI para documentação de APIs
+- Logs de workers e jobs
+- Métricas de tokens OpenAI consumidos
+
+**Status:** ✅ Implementado
 
 ---
 
 ## RNF-07: Usabilidade
 
-**Requisito:** O sistema deve ser fácil de usar.
+**Requisito:** O sistema deve ser fácil de usar para usuários não técnicos.
 
 **Critérios:**
-- Interface intuitiva (sem manual)
-- Responsivo (mobile-first)
-- Acessibilidade WCAG 2.1 nível AA
-- Feedback claro para ações do usuário
+- Interface intuitiva (aprendizado em < 30 min)
+- Responsivo (mobile-first via Tailwind)
+- Feedback claro para ações do usuário (Sonner toasts)
+- Carregamento com estados visuais (skeletons, spinners)
 
 **Validação:**
-- Testes de usabilidade com usuários reais
-- Análise de métricas de uso
+- Onboarding guiado para configuração de IA
+- Tooltips e labels claras
+- Mensagens de erro em português
+
+**Status:** ✅ Implementado
 
 ---
 
@@ -129,15 +151,18 @@
 **Requisito:** O código deve ser fácil de manter e evoluir.
 
 **Critérios:**
-- Cobertura de testes: **≥ 80%** (unitários)
-- Código documentado
-- Arquitetura modular
+- Cobertura de testes: **≥ 70%** (meta)
+- Código tipado com TypeScript
+- Arquitetura modular (modules/services)
 - CI/CD automatizado
 
 **Práticas:**
-- Code review obrigatório
-- Padrões de código (ESLint, Prettier)
-- Documentação de APIs (OpenAPI/Swagger)
+- ESLint + Prettier para formatação
+- Documentação de APIs via Swagger
+- Migrations Prisma versionadas
+- README com instruções de desenvolvimento
+
+**Status:** ✅ Implementado
 
 ---
 
@@ -146,9 +171,16 @@
 **Requisito:** Proteger APIs contra abuse e garantir fair use.
 
 **Critérios:**
-- Rate limit por usuário: **{{LIMITE_USUARIO}}** requests/minuto
-- Rate limit global: **{{LIMITE_GLOBAL}}** requests/segundo
-- Mensagens de erro claras quando excedido
+- Rate limit por IP: **100** requests/minuto
+- Rate limit de OpenAI: baseado em tokens contratados
+- Mensagens de erro claras (HTTP 429)
+
+**Implementação:**
+- Fastify rate-limit plugin
+- Tracking de token usage por empresa
+- Alertas quando limite próximo
+
+**Status:** ✅ Implementado
 
 ---
 
@@ -157,10 +189,29 @@
 **Requisito:** Dados devem ser recuperáveis em caso de falha.
 
 **Critérios:**
-- Backup diário do banco de dados
-- Retenção de backups: **{{RETENCAO}}** dias
-- RTO (Recovery Time Objective): **{{RTO}}**
-- RPO (Recovery Point Objective): **{{RPO}}**
+- Backup diário do PostgreSQL
+- Retenção de backups: **30** dias
+- RTO (Recovery Time Objective): **1 hora**
+- RPO (Recovery Point Objective): **24 horas**
+
+**Estratégia:**
+- pg_dump automatizado (cron)
+- Backups em storage separado (S3/R2)
+- Documentação de procedimento de restore
+
+**Status:** 📋 Planejado (dependente de infraestrutura)
+
+---
+
+## RNF-11: Internacionalização (i18n)
+
+**Requisito:** Suporte a múltiplos idiomas (futuro).
+
+**Critérios:**
+- Interface em português (atual)
+- Estrutura preparada para i18n (futuro)
+
+**Status:** 📋 Planejado para V2
 
 ---
 
@@ -168,16 +219,17 @@
 
 | ID | Categoria | Prioridade | Status |
 |----|-----------|------------|--------|
-| RNF-01 | Performance | Must Have | 📋 |
-| RNF-02 | Escalabilidade | Should Have | 📋 |
-| RNF-03 | Disponibilidade | Must Have | 📋 |
-| RNF-04 | Segurança | Must Have | 📋 |
-| RNF-05 | Compliance | Must Have | 📋 |
-| RNF-06 | Observabilidade | Should Have | 📋 |
-| RNF-07 | Usabilidade | Should Have | 📋 |
-| RNF-08 | Manutenibilidade | Should Have | 📋 |
-| RNF-09 | Rate Limiting | Should Have | 📋 |
-| RNF-10 | Backup | Must Have | 📋 |
+| RNF-01 | Performance | Must Have | ✅ Implementado |
+| RNF-02 | Escalabilidade | Should Have | ✅ Implementado |
+| RNF-03 | Disponibilidade | Must Have | ✅ Implementado |
+| RNF-04 | Segurança | Must Have | ✅ Implementado |
+| RNF-05 | Compliance | Must Have | 🚧 Parcial |
+| RNF-06 | Observabilidade | Should Have | ✅ Implementado |
+| RNF-07 | Usabilidade | Should Have | ✅ Implementado |
+| RNF-08 | Manutenibilidade | Should Have | ✅ Implementado |
+| RNF-09 | Rate Limiting | Should Have | ✅ Implementado |
+| RNF-10 | Backup | Must Have | 📋 Planejado |
+| RNF-11 | i18n | Could Have | 📋 Planejado |
 
 ---
 

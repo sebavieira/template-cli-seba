@@ -1,7 +1,7 @@
 # 6. Priorização de Features (MoSCoW)
 
 **Versão:** 1.0.0
-**Última Atualização:** {{DATA}}
+**Última Atualização:** 2026-01-19
 
 [← Voltar para Índice PRD](README.md)
 
@@ -22,15 +22,23 @@ Este documento classifica todas as funcionalidades usando o framework **MoSCoW**
 
 Funcionalidades **obrigatórias** para o lançamento. Sem elas, o produto não funciona.
 
-| ID | Funcionalidade | Epic | Justificativa |
-|----|----------------|------|---------------|
-| US-001 | {{MUST_1}} | {{EPIC}} | {{JUSTIFICATIVA}} |
-| US-002 | {{MUST_2}} | {{EPIC}} | {{JUSTIFICATIVA}} |
-| US-003 | {{MUST_3}} | {{EPIC}} | {{JUSTIFICATIVA}} |
-| US-004 | {{MUST_4}} | {{EPIC}} | {{JUSTIFICATIVA}} |
-| US-005 | {{MUST_5}} | {{EPIC}} | {{JUSTIFICATIVA}} |
+| ID | Funcionalidade | Epic | Status |
+|----|----------------|------|--------|
+| US-01.1 | Registro de usuário | Autenticação | ✅ |
+| US-01.2 | Login com email/senha | Autenticação | ✅ |
+| US-01.3 | JWT com refresh token | Autenticação | ✅ |
+| US-02.1 | Conexão de instância WhatsApp | WhatsApp | ✅ |
+| US-02.3 | Recebimento de mensagens (webhook) | WhatsApp | ✅ |
+| US-02.4 | Envio de mensagens | WhatsApp | ✅ |
+| US-03.1 | Listagem de contatos | Contatos | ✅ |
+| US-03.4 | Sistema de tags | Contatos | ✅ |
+| US-04.1 | Criação de funil | Funis | ✅ |
+| US-04.3 | Visualização Kanban | Funis | ✅ |
+| US-05.1 | Configuração de prompt | IA | ✅ |
+| US-05.4 | Respostas automáticas | IA | ✅ |
+| US-08.1 | Dashboard principal | Dashboard | ✅ |
 
-**Total Must Have:** {{TOTAL_MUST}}
+**Total Must Have:** 13 funcionalidades
 
 ---
 
@@ -38,13 +46,21 @@ Funcionalidades **obrigatórias** para o lançamento. Sem elas, o produto não f
 
 Funcionalidades **importantes** que agregam valor significativo, mas o sistema funciona sem elas.
 
-| ID | Funcionalidade | Epic | Justificativa |
-|----|----------------|------|---------------|
-| US-006 | {{SHOULD_1}} | {{EPIC}} | {{JUSTIFICATIVA}} |
-| US-007 | {{SHOULD_2}} | {{EPIC}} | {{JUSTIFICATIVA}} |
-| US-008 | {{SHOULD_3}} | {{EPIC}} | {{JUSTIFICATIVA}} |
+| ID | Funcionalidade | Epic | Status |
+|----|----------------|------|--------|
+| US-01.6 | Gestão de equipe | Autenticação | ✅ |
+| US-02.7 | Múltiplos provedores WhatsApp | WhatsApp | ✅ |
+| US-03.5 | Notas em contatos | Contatos | ✅ |
+| US-03.6 | Bloqueio de contatos | Contatos | ✅ |
+| US-05.2 | Onboarding guiado | IA | ✅ |
+| US-05.3 | Níveis de autonomia | IA | ✅ |
+| US-05.6 | Análise de sentimento | IA | ✅ |
+| US-06.1 | Criação de deals | Deals | ✅ |
+| US-06.3 | Notas em deals | Deals | ✅ |
+| US-07.1 | Regras de follow-up | Follow-ups | ✅ |
+| US-08.4 | Notificações de equipe | Dashboard | ✅ |
 
-**Total Should Have:** {{TOTAL_SHOULD}}
+**Total Should Have:** 11 funcionalidades
 
 ---
 
@@ -52,12 +68,16 @@ Funcionalidades **importantes** que agregam valor significativo, mas o sistema f
 
 Funcionalidades **desejáveis** que melhoram a experiência, implementadas se sobrar tempo.
 
-| ID | Funcionalidade | Epic | Justificativa |
-|----|----------------|------|---------------|
-| US-009 | {{COULD_1}} | {{EPIC}} | {{JUSTIFICATIVA}} |
-| US-010 | {{COULD_2}} | {{EPIC}} | {{JUSTIFICATIVA}} |
+| ID | Funcionalidade | Epic | Status |
+|----|----------------|------|--------|
+| US-04.5 | Limites de WIP | Funis | 📋 |
+| US-06.5 | Anexos em deals | Deals | ✅ |
+| US-06.6 | Métricas de deals | Deals | 📋 |
+| US-07.5 | Post-actions em follow-ups | Follow-ups | ✅ |
+| US-09.1 | Criação de flows | Flows | 🚧 |
+| US-09.2 | Editor visual de flows | Flows | 🚧 |
 
-**Total Could Have:** {{TOTAL_COULD}}
+**Total Could Have:** 6 funcionalidades
 
 ---
 
@@ -67,11 +87,17 @@ Funcionalidades **fora do escopo** atual, mas podem ser consideradas no futuro.
 
 | Funcionalidade | Motivo | Versão Futura |
 |----------------|--------|---------------|
-| {{WONT_1}} | {{MOTIVO_1}} | V1.1 |
-| {{WONT_2}} | {{MOTIVO_2}} | V2.0 |
-| {{WONT_3}} | {{MOTIVO_3}} | V2.0 |
+| Integração Instagram/Messenger | Foco em WhatsApp primeiro | V3.0 |
+| App mobile nativo | Web responsivo atende | V2.5 |
+| Relatórios PDF/Excel | Dashboard cobre necessidades | V2.0 |
+| Integração ERPs | Complexidade alta | V3.0 |
+| Transcrição de áudios | Custo adicional de API | V2.0 |
+| Multi-idioma interface | Mercado BR prioritário | V2.5 |
+| Integração calendário | Escopo diferente | V2.0 |
+| Pagamentos no chat | E-commerce scope | V3.0 |
+| White-label | Modelo de negócio diferente | V3.0 |
 
-**Total Won't Have:** {{TOTAL_WONT}}
+**Total Won't Have:** 9 funcionalidades
 
 ---
 
@@ -79,11 +105,11 @@ Funcionalidades **fora do escopo** atual, mas podem ser consideradas no futuro.
 
 | Categoria | Quantidade | Percentual |
 |-----------|------------|------------|
-| 🔴 Must Have | {{TOTAL_MUST}} | {{PERCENT_MUST}}% |
-| 🟡 Should Have | {{TOTAL_SHOULD}} | {{PERCENT_SHOULD}}% |
-| 🟢 Could Have | {{TOTAL_COULD}} | {{PERCENT_COULD}}% |
-| ⚪ Won't Have | {{TOTAL_WONT}} | - |
-| **Total MVP** | **{{TOTAL_MVP}}** | **100%** |
+| 🔴 Must Have | 13 | 43% |
+| 🟡 Should Have | 11 | 37% |
+| 🟢 Could Have | 6 | 20% |
+| ⚪ Won't Have | 9 | - |
+| **Total MVP** | **30** | **100%** |
 
 ---
 
@@ -110,21 +136,27 @@ Baixo Valor + Alto Esforço  = Won't Have (Não fazer agora)
 
 ## Sequência de Implementação
 
-### Fase 1: Core (Semana 1-2)
-1. US-001: {{DESCRICAO}}
-2. US-002: {{DESCRICAO}}
+### Fase 1: Core (MVP)
+1. Autenticação completa
+2. Integração WhatsApp
+3. CRM de Contatos básico
+4. Funis Kanban
 
-### Fase 2: Essencial (Semana 3-4)
-3. US-003: {{DESCRICAO}}
-4. US-004: {{DESCRICAO}}
+### Fase 2: IA (MVP)
+5. Chatbot com OpenAI
+6. Prompts customizáveis
+7. Dashboard básico
 
-### Fase 3: Importante (Semana 5-6)
-5. US-005: {{DESCRICAO}}
-6. US-006: {{DESCRICAO}}
+### Fase 3: Melhorias (V1.1)
+8. Deals e tracking
+9. Follow-ups automáticos
+10. Análise de sentimento
+11. Notificações
 
-### Fase 4: Melhorias (Semana 7+)
-7. US-007: {{DESCRICAO}}
-8. US-008: {{DESCRICAO}}
+### Fase 4: Avançado (V2.0)
+12. Flow Builder
+13. Relatórios avançados
+14. API pública
 
 ---
 

@@ -1,148 +1,114 @@
-# Template de Projeto com Documentação Estruturada
+# Evo AI Connect - Documentação
 
-> Framework completo para criar projetos com documentação profissional e desenvolvimento guiado por IA
+> Plataforma de automação WhatsApp com IA, CRM integrado e gestão de funis de vendas
 
 **Versão:** 1.0.0
+**Última Atualização:** 2026-01-20
 
 ---
 
-## O que é este Template?
+## O que é o Evo AI Connect?
 
-Este template fornece uma estrutura completa para iniciar novos projetos de software com:
+O **Evo AI Connect** é uma plataforma completa para automação de vendas via WhatsApp, integrando:
 
-1. **Briefing Guiado** - Processo interativo para capturar requisitos
-2. **PRD Estruturado** - Documentos de requisitos organizados
-3. **SPEC Técnica** - Especificações técnicas detalhadas
-4. **Integração com IA** - Configuração para Claude Code e outras IAs
-5. **Modo Autônomo** - Sistema de auto-progressão para desenvolvimento
-
----
-
-## Como Usar
-
-### 1. Copie o Template
-
-```bash
-cp -r template/ /caminho/do/seu-novo-projeto/
-cd /caminho/do/seu-novo-projeto/
-```
-
-### 2. Inicie o Briefing
-
-Abra o Claude Code e digite:
-
-```
-/briefing
-```
-
-Ou manualmente:
-
-```
-Leia briefing/GUIA-BRIEFING.md e me guie pelo processo
-```
-
-### 3. O Sistema Vai Guiar Você
-
-O briefing consiste em 6 etapas:
-
-| Etapa | Descrição | Duração |
-|-------|-----------|---------|
-| 1. Visão | Nome, problema, solução | 5-10 min |
-| 2. Personas | Quem vai usar, dores, necessidades | 10-15 min |
-| 3. Escopo | O que faz, o que não faz | 5-10 min |
-| 4. Funcionalidades | Listagem de features | 10-20 min |
-| 5. Técnico | Stack, integrações | 5-10 min |
-| 6. Revisão | Validação final | 5 min |
-
-**Total:** 40-70 minutos
-
-### 4. Documentação é Gerada Automaticamente
-
-Após o briefing, a IA gera:
-
-- `docs/prd/` - Documentos de requisitos
-- `docs/spec/` - Especificações técnicas
-- `docs/STATUS.md` - Tracker de progresso
-
-### 5. Comece a Implementar
-
-```
-continue
-```
-
-A IA segue o STATUS.md e implementa tarefa por tarefa.
+1. **CRM Inteligente** - Gestão de contatos, deals e funis de vendas
+2. **Integração WhatsApp** - Conexão com Evolution API/UAZAPI para envio/recebimento de mensagens
+3. **Inteligência Artificial** - GPT-4 para sugestões de resposta e análise de conversas
+4. **Automações** - Follow-ups automáticos e flows visuais
+5. **Dashboard** - Métricas e relatórios em tempo real
 
 ---
 
-## Estrutura do Template
+## Stack Tecnológica
+
+### Backend
+- **Runtime:** Node.js 20.x
+- **Framework:** Fastify 4.28.1
+- **Linguagem:** TypeScript 5.6.3
+- **ORM:** Prisma 5.22.0
+- **Banco de Dados:** PostgreSQL 16 + pgvector
+- **Queue:** Redis 7 + BullMQ 5.x
+
+### Frontend
+- **Framework:** React 18.3.1
+- **Build Tool:** Vite 5.4.19
+- **Estilização:** TailwindCSS + Shadcn/UI
+- **Estado:** Zustand + TanStack Query
+- **Realtime:** Socket.io Client
+
+### Integrações
+- **WhatsApp:** Evolution API / UAZAPI
+- **IA:** OpenAI GPT-4
+- **Embeddings:** pgvector para busca semântica
+
+---
+
+## Estrutura da Documentação
 
 ```
-template/
-├── README.md                    ← Este arquivo
-├── INÍCIO-RÁPIDO.md            ← Guia para usuários não-técnicos
+docs/
+├── INDEX.md                    ← Navegação completa
+├── STATUS.md                   ← Estado atual do projeto
+├── MANUTENÇÃO.md               ← Guia de manutenção
 │
-├── briefing/                    ← Sistema de briefing guiado
-│   ├── GUIA-BRIEFING.md        ← Instruções do processo
-│   ├── 01-VISAO.md             ← Template de perguntas de visão
-│   ├── 02-PERSONAS.md          ← Template de perguntas de personas
-│   ├── 03-ESCOPO.md            ← Template de perguntas de escopo
-│   ├── 04-FUNCIONALIDADES.md   ← Template de perguntas de features
-│   ├── 05-TECNICO.md           ← Template de perguntas técnicas
-│   └── 06-REVISAO.md           ← Checklist de revisão
+├── prd/                        ← Requisitos de produto
+│   ├── README.md               ← Índice do PRD
+│   ├── 01-visao-objetivos.md
+│   ├── 02-contexto-personas.md
+│   ├── 03-escopo.md
+│   ├── 04-user-stories/        ← 9 Epics
+│   ├── 05-rnf.md
+│   ├── 06-priorizacao.md
+│   ├── 07-dependencias.md
+│   ├── 08-compliance.md
+│   ├── 09-metricas.md
+│   ├── 10-riscos.md
+│   └── 11-glossario.md
 │
-├── docs/                        ← Documentação gerada
-│   ├── INDEX.md                ← Índice navegável (template)
-│   ├── STATUS.md               ← Tracker de progresso (template)
-│   ├── MANUTENÇÃO.md           ← Guia de manutenção
-│   │
-│   ├── prd/                    ← Product Requirements Document
-│   │   ├── README.md           ← Índice do PRD
-│   │   ├── 01-visao-objetivos.md
-│   │   ├── 02-contexto-personas.md
-│   │   ├── 03-escopo.md
-│   │   ├── 04-user-stories/
-│   │   │   ├── README.md
-│   │   │   └── epic-XX-template.md
-│   │   ├── 05-rnf.md
-│   │   ├── 06-priorizacao.md
-│   │   ├── 07-dependencias.md
-│   │   ├── 08-compliance.md
-│   │   ├── 09-metricas.md
-│   │   ├── 10-riscos.md
-│   │   └── 11-glossario.md
-│   │
-│   └── spec/                   ← Especificação Técnica
-│       ├── README.md           ← Índice da SPEC
-│       ├── 01-visao-geral.md
-│       ├── 02-arquitetura.md
-│       ├── 03-modelo-dados.md
-│       ├── 04-contratos-api/
-│       │   ├── README.md
-│       │   └── dominio-template.md
-│       ├── 05-diagramas-sequencia.md
-│       ├── 06-maquina-estados.md
-│       ├── 07-tratamento-erros.md
-│       ├── 08-estrategia-testes.md
-│       ├── 09-deployment.md
-│       ├── 10-observabilidade.md
-│       ├── 11-seguranca.md
-│       ├── 12-performance.md
-│       └── 13-rastreabilidade.md
-│
-├── .claude/                    ← Configuração Claude Code
-│   └── CLAUDE.md              ← Instruções automáticas
-│
-├── .ai-instructions.md         ← Protocolo para IAs
-├── AI-START.md                 ← Quick start para IAs
-├── CHANGELOG.md                ← Histórico de mudanças
-└── .gitignore                  ← Arquivos ignorados pelo Git
+└── spec/                       ← Especificações técnicas
+    ├── README.md               ← Índice da SPEC
+    ├── 01-visao-geral.md
+    ├── 02-arquitetura.md
+    ├── 03-modelo-dados.md
+    ├── 04-contratos-api/       ← 8 domínios
+    ├── 05-diagramas-sequencia.md
+    ├── 06-maquina-estados.md
+    ├── 07-tratamento-erros.md
+    ├── 08-estrategia-testes.md
+    ├── 09-deployment.md
+    ├── 10-observabilidade.md
+    ├── 11-seguranca.md
+    ├── 12-performance.md
+    └── 13-rastreabilidade.md
 ```
 
 ---
 
-## Comandos Disponíveis
+## Como Usar Esta Documentação
 
-Após configurar, você pode usar:
+### Para Desenvolvedores
+
+1. **Início:** Leia `docs/STATUS.md` para ver o estado atual
+2. **Requisitos:** Consulte `docs/prd/` para entender o que construir
+3. **Implementação:** Use `docs/spec/` para detalhes técnicos
+
+### Para Product Managers
+
+1. **Visão Geral:** `docs/prd/01-visao-objetivos.md`
+2. **Personas:** `docs/prd/02-contexto-personas.md`
+3. **Roadmap:** `docs/prd/06-priorizacao.md`
+
+### Para Agentes de IA
+
+1. **Quick Start:** `AI-START.md` (~2K tokens)
+2. **Protocolo:** `.ai-instructions.md`
+3. **Config Claude:** `.claude/CLAUDE.md`
+
+---
+
+## Comandos do Sistema Autônomo
+
+Ao usar com Claude Code ou outras IAs:
 
 | Comando | Descrição |
 |---------|-----------|
@@ -155,82 +121,94 @@ Após configurar, você pode usar:
 
 ---
 
-## Filosofia do Template
+## Funcionalidades Principais
 
-### 1. Documentação Primeiro
+### Epic 01: Autenticação
+- Registro e login de usuários
+- JWT com refresh tokens
+- RBAC (admin/user)
 
-Antes de escrever código, documentamos:
-- O que estamos construindo (PRD)
-- Como vamos construir (SPEC)
-- Por que estamos construindo (Visão)
+### Epic 02: WhatsApp
+- Conexão de instâncias
+- Envio/recebimento de mensagens
+- Status de entrega
 
-### 2. Estrutura Modular
+### Epic 03: Contatos
+- CRUD de contatos
+- Tags e segmentação
+- Importação em massa
 
-Documentos são divididos em arquivos pequenos:
-- Fácil de navegar
-- Não estoura contexto de IAs
-- Manutenção simplificada
+### Epic 04: Funis
+- Criação de funis e etapas
+- Configuração de cores e ordem
 
-### 3. Rastreabilidade
+### Epic 05: IA
+- Embeddings de conversas
+- Sugestões de resposta
+- Análise de sentimento
 
-Cada funcionalidade é rastreável:
-- User Story → Requisito → API → Teste
+### Epic 06: Deals
+- Gestão de negociações
+- Notas com IA
+- Movimentação entre etapas
 
-### 4. Modo Autônomo
+### Epic 07: Follow-ups
+- Agendamento automático
+- Templates de mensagens
+- Cancelamento inteligente
 
-A IA pode trabalhar sem supervisão constante:
-- Lê STATUS.md para saber o que fazer
-- Implementa, testa, documenta
-- Atualiza progresso automaticamente
+### Epic 08: Dashboard
+- Métricas de funil
+- KPIs de mensagens
+- Relatórios exportáveis
+
+### Epic 09: Flows
+- Editor visual de automações
+- Triggers e condições
+- Execução automática
 
 ---
 
-## Customização
+## Status do Projeto
 
-### Adicionar Novas Seções ao PRD
+| Fase | Status | Progresso |
+|------|--------|-----------|
+| Documentação | ✅ Completo | 100% |
+| Setup/Infra | ⏳ Pendente | 0% |
+| Autenticação | ⏳ Pendente | 0% |
+| WhatsApp | ⏳ Pendente | 0% |
+| CRM Core | ⏳ Pendente | 0% |
+| IA & Automação | ⏳ Pendente | 0% |
+| Dashboard | ⏳ Pendente | 0% |
 
-1. Crie arquivo em `docs/prd/XX-nome.md`
-2. Atualize `docs/prd/README.md`
-3. Atualize `docs/INDEX.md`
-
-### Adicionar Novos Domínios de API
-
-1. Crie arquivo em `docs/spec/04-contratos-api/nome.md`
-2. Atualize `docs/spec/04-contratos-api/README.md`
-
-### Alterar Processo de Briefing
-
-Edite os arquivos em `briefing/` para adicionar/remover perguntas.
-
----
-
-## Compatibilidade
-
-Este template é compatível com:
-
-- **Claude Code** (configuração automática via .claude/)
-- **GPT-4** (use AI-START.md como prompt inicial)
-- **Gemini** (use AI-START.md como prompt inicial)
-- **Outras IAs** (siga .ai-instructions.md)
+**Progresso Total:** Fase 1 concluída (Documentação)
 
 ---
 
 ## Contribuindo
 
-Para melhorar este template:
-
-1. Identifique área de melhoria
-2. Documente a mudança
-3. Teste com projeto real
-4. Atualize README e guias
+1. Leia `docs/STATUS.md` para identificar próxima tarefa
+2. Consulte a documentação relevante (PRD + SPEC)
+3. Implemente seguindo os padrões do projeto
+4. Atualize `docs/STATUS.md` após completar
 
 ---
 
-## Licença
+## Links Úteis
 
-[Definir licença]
+- [Status do Projeto](docs/STATUS.md)
+- [Índice de Documentação](docs/INDEX.md)
+- [PRD - Requisitos](docs/prd/README.md)
+- [SPEC - Técnico](docs/spec/README.md)
+- [Changelog](CHANGELOG.md)
 
 ---
 
+<<<<<<< HEAD
 **Versão:** 1.0.0
 **Data:** 2026-01-19
+=======
+**Projeto:** Evo AI Connect
+**Versão:** 0.2.0
+**Data:** 2026-01-20
+>>>>>>> a270160 (docs: update documentation)

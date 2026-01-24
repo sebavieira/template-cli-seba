@@ -1,8 +1,9 @@
 # PRD - Product Requirements Document
 
+**Projeto:** Evo AI Connect
 **Versão:** 1.0.0
-**Status:** Template
-**Última Atualização:** {{DATA}}
+**Status:** Ativo
+**Última Atualização:** 2026-01-19
 **Owner:** Product Team
 
 ---
@@ -25,9 +26,9 @@ Problema sendo resolvido, personas detalhadas e necessidades dos usuários.
 
 **Conteúdo:**
 - Declaração do Problema
-- Personas Detalhadas
+- Personas Detalhadas (Carlos, Ana, Roberto)
 - Necessidades e Dores
-- Análise Competitiva (opcional)
+- Análise Competitiva
 
 ---
 
@@ -43,12 +44,18 @@ Definição do que está incluído no MVP e fora do escopo.
 ---
 
 ### 4. [User Stories e Requisitos](04-user-stories/README.md)
-User stories detalhadas organizadas em epics.
+User stories detalhadas organizadas em 9 epics.
 
 **Epics:**
-- [Epic 1: {{EPIC_1}}](04-user-stories/epic-01-{{slug}}.md)
-- [Epic 2: {{EPIC_2}}](04-user-stories/epic-02-{{slug}}.md)
-- ... (adicionar conforme necessário)
+- [Epic 01: Autenticação](04-user-stories/epic-01-autenticacao.md)
+- [Epic 02: WhatsApp](04-user-stories/epic-02-whatsapp.md)
+- [Epic 03: Contatos](04-user-stories/epic-03-contatos.md)
+- [Epic 04: Funis](04-user-stories/epic-04-funis.md)
+- [Epic 05: IA](04-user-stories/epic-05-ia.md)
+- [Epic 06: Deals](04-user-stories/epic-06-deals.md)
+- [Epic 07: Follow-ups](04-user-stories/epic-07-followups.md)
+- [Epic 08: Dashboard](04-user-stories/epic-08-dashboard.md)
+- [Epic 09: Flows](04-user-stories/epic-09-flows.md)
 
 ---
 
@@ -56,12 +63,12 @@ User stories detalhadas organizadas em epics.
 Performance, escalabilidade, segurança e compliance.
 
 **Conteúdo:**
-- Performance e Latência
-- Escalabilidade
-- Disponibilidade
-- Segurança
-- Compliance
-- Observabilidade
+- Performance e Latência (< 200ms p95)
+- Escalabilidade (500 usuários simultâneos)
+- Disponibilidade (99.5% uptime)
+- Segurança (JWT, HTTPS, rate limiting)
+- Compliance (LGPD)
+- Observabilidade (logs, métricas)
 
 ---
 
@@ -78,6 +85,12 @@ Classificação das funcionalidades.
 
 ### 7. [Dependências e Integrações](07-dependencias.md)
 APIs externas e serviços de terceiros.
+
+**Integrações:**
+- Evolution API / UAZAPI (WhatsApp)
+- OpenAI API (IA)
+- PostgreSQL + Redis
+- AWS S3 / Cloudflare R2
 
 ---
 
@@ -101,6 +114,17 @@ Termos e definições.
 
 ---
 
+## Resumo do Produto
+
+**Evo AI Connect** é uma plataforma de automação de WhatsApp com IA integrada para equipes de vendas. Combina:
+
+- **CRM Visual**: Gerenciamento de contatos com tags e notas
+- **Funis Kanban**: Pipeline de vendas visual
+- **Chatbot IA**: Respostas automáticas com OpenAI
+- **Deals**: Tracking de oportunidades de venda
+- **Follow-ups**: Automação de acompanhamento
+- **Flows**: Automação visual (em desenvolvimento)
+
 ## Como Usar Este PRD
 
 1. **Leitura Sequencial:** Comece pelo Sumário Executivo
@@ -110,7 +134,9 @@ Termos e definições.
 
 ## Versionamento
 
-- **V1.0.0** ({{DATA}}): Versão inicial
+| Versão | Data | Descrição |
+|--------|------|-----------|
+| 1.0.0 | 2026-01-19 | Documentação inicial completa |
 
 ---
 

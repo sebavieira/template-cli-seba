@@ -1,8 +1,9 @@
 # SPEC - Especificação Técnica
 
+**Projeto:** Evo AI Connect
 **Versão:** 1.0.0
-**Status:** Template
-**Última Atualização:** {{DATA}}
+**Status:** Ativo
+**Última Atualização:** 2026-01-19
 **Owner:** Tech Lead
 
 ---
@@ -21,8 +22,14 @@ Diagrama ER, schemas completos e relacionamentos.
 ### 4. [Contratos de API](04-contratos-api/)
 Endpoints REST organizados por domínio:
 - [Índice de Endpoints](04-contratos-api/README.md)
-- [{{DOMINIO_1}}](04-contratos-api/{{dominio_1}}.md)
-- [{{DOMINIO_2}}](04-contratos-api/{{dominio_2}}.md)
+- [Autenticação](04-contratos-api/auth.md)
+- [WhatsApp](04-contratos-api/whatsapp.md)
+- [Contatos](04-contratos-api/contacts.md)
+- [Funis](04-contratos-api/funnels.md)
+- [Deals](04-contratos-api/deals.md)
+- [IA/Prompts](04-contratos-api/ai.md)
+- [Follow-ups](04-contratos-api/followups.md)
+- [Flows](04-contratos-api/flows.md)
 
 ### 5. [Diagramas de Sequência](05-diagramas-sequencia.md)
 Fluxos principais em Mermaid.
@@ -50,6 +57,35 @@ Otimizações, caching e scaling.
 
 ### 13. [Rastreabilidade](13-rastreabilidade.md)
 Matriz US → RF → Endpoint → Tests.
+
+---
+
+## Resumo Técnico
+
+**Evo AI Connect** é uma plataforma de automação de WhatsApp com IA integrada.
+
+### Stack Tecnológico
+
+| Camada | Tecnologia | Versão |
+|--------|------------|--------|
+| **Backend** | Fastify + TypeScript | 4.28.1 / 5.6.3 |
+| **Frontend** | React + Vite | 18.3.1 / 5.4.19 |
+| **Database** | PostgreSQL + pgvector | 16.x / 0.5.x |
+| **Cache/Queue** | Redis + BullMQ | 7.x / 5.x |
+| **ORM** | Prisma | 5.22.0 |
+| **UI** | Tailwind + Shadcn/UI | 3.4.17 |
+| **Real-time** | Socket.io | 4.8.3 |
+
+### Principais Domínios
+
+1. **Auth** - Autenticação JWT com refresh tokens
+2. **WhatsApp** - Integração Evolution/UAZAPI
+3. **Contacts** - CRM com tags e notas
+4. **Funnels** - Pipeline Kanban de vendas
+5. **Deals** - Oportunidades com valores
+6. **AI** - Chatbot OpenAI com prompts
+7. **Follow-ups** - Automação de acompanhamento
+8. **Flows** - Automação visual (em desenvolvimento)
 
 ---
 

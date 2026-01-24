@@ -1,7 +1,7 @@
-# 🔧 Guia de Manutenção da Documentação
+# 🔧 Guia de Manutenção da Documentação - Evo AI Connect
 
 **Versão:** 1.0.0
-**Última Atualização:** {{DATA}}
+**Última Atualização:** 2026-01-20
 
 ---
 
@@ -48,11 +48,28 @@ docs/
 ├── prd/                  # Requisitos
 │   ├── README.md         # Índice do PRD
 │   ├── 01-11 seções      # Documentos do PRD
-│   └── 04-user-stories/  # Epics separados
+│   └── 04-user-stories/  # 9 Epics separados
+│       ├── epic-01-autenticacao.md
+│       ├── epic-02-whatsapp.md
+│       ├── epic-03-contatos.md
+│       ├── epic-04-funis.md
+│       ├── epic-05-ia.md
+│       ├── epic-06-deals.md
+│       ├── epic-07-followups.md
+│       ├── epic-08-dashboard.md
+│       └── epic-09-flows.md
 └── spec/                 # Especificações
     ├── README.md         # Índice da SPEC
     ├── 01-13 seções      # Documentos da SPEC
-    └── 04-contratos-api/ # APIs separadas
+    └── 04-contratos-api/ # 8 APIs separadas
+        ├── auth.md
+        ├── whatsapp.md
+        ├── contacts.md
+        ├── funnels.md
+        ├── deals.md
+        ├── ai.md
+        ├── followups.md
+        └── flows.md
 ```
 
 ### Convenções de Nomes
@@ -62,7 +79,7 @@ docs/
 | Seções PRD | `NN-nome.md` | `01-visao-objetivos.md` |
 | Seções SPEC | `NN-nome.md` | `03-modelo-dados.md` |
 | Epics | `epic-NN-nome.md` | `epic-01-autenticacao.md` |
-| APIs | `dominio.md` | `usuarios.md` |
+| APIs | `dominio.md` | `auth.md` |
 
 ---
 
@@ -202,10 +219,10 @@ Use `{{PLACEHOLDER}}` para valores a serem preenchidos:
 
 | Métrica | Meta | Atual |
 |---------|------|-------|
-| Cobertura de US | 100% | {{X}}% |
-| APIs documentadas | 100% | {{Y}}% |
-| Links válidos | 100% | {{Z}}% |
-| Última atualização | <7 dias | {{DATA}} |
+| Cobertura de US | 100% | 100% |
+| APIs documentadas | 100% | 100% |
+| Links válidos | 100% | 100% |
+| Última atualização | <7 dias | 2026-01-20 |
 
 ---
 

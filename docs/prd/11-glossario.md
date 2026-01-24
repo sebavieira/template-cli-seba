@@ -1,7 +1,7 @@
 # 11. Glossário
 
 **Versão:** 1.0.0
-**Última Atualização:** {{DATA}}
+**Última Atualização:** 2026-01-19
 
 [← Voltar para Índice PRD](README.md)
 
@@ -11,30 +11,32 @@
 
 | Termo | Definição |
 |-------|-----------|
-| **{{TERMO_1}}** | {{DEFINICAO_1}} |
-| **{{TERMO_2}}** | {{DEFINICAO_2}} |
-| **{{TERMO_3}}** | {{DEFINICAO_3}} |
+| **Lead** | Contato potencialmente interessado em comprar |
+| **Prospect** | Lead que demonstrou interesse ativo |
+| **Conversão** | Ação de transformar lead em cliente |
+| **Pipeline** | Funil de vendas com estágios definidos |
+| **Win Rate** | Taxa de negócios ganhos vs total |
+| **Churn** | Taxa de cancelamento/perda de clientes |
+| **Follow-up** | Acompanhamento de contato para manter engajamento |
+| **SDR** | Sales Development Representative - vendedor de prospecção |
+| **Closer** | Vendedor responsável por fechamento |
 
-<!--
-Adicione termos específicos do domínio do seu projeto.
+---
 
-Exemplos para diferentes tipos de projeto:
+## Termos do Produto
 
-E-commerce:
-- SKU: Stock Keeping Unit, identificador único de produto
-- Carrinho: Seleção temporária de itens para compra
-- Checkout: Processo de finalização de compra
-
-SaaS:
-- Tenant: Organização/empresa cliente
-- Workspace: Ambiente isolado de trabalho
-- Subscription: Assinatura do serviço
-
-Agendamento:
-- Slot: Período disponível para agendamento
-- No-show: Cliente que não compareceu
-- Buffer: Tempo entre agendamentos
--->
+| Termo | Definição |
+|-------|-----------|
+| **Instância** | Conexão ativa de um número WhatsApp |
+| **Conversa** | Histórico de mensagens com um contato |
+| **Tag** | Etiqueta para organizar contatos |
+| **Estágio** | Fase do funil em que o contato se encontra |
+| **Deal** | Oportunidade de venda com valor monetário |
+| **Flow** | Automação visual com nodes e conexões |
+| **Prompt** | Instrução de sistema para a IA |
+| **Quick Reply** | Resposta pré-definida para uso rápido |
+| **Autonomia** | Nível de ações que a IA pode executar sozinha |
+| **Sentimento** | Análise emocional da conversa (positivo/neutro/negativo) |
 
 ---
 
@@ -49,7 +51,13 @@ Agendamento:
 | **MVP** | Minimum Viable Product - versão mínima funcional |
 | **ORM** | Object-Relational Mapping - mapeamento de objetos para banco |
 | **REST** | Representational State Transfer - arquitetura de APIs |
-| **Webhook** | Callback HTTP que notifica eventos |
+| **Webhook** | Callback HTTP que notifica eventos em tempo real |
+| **WebSocket** | Protocolo para comunicação bidirecional em tempo real |
+| **Multi-tenant** | Arquitetura onde múltiplas empresas usam o mesmo sistema isoladamente |
+| **Worker** | Processo background que executa tarefas assíncronas |
+| **Queue** | Fila de tarefas para processamento ordenado |
+| **Token** | Unidade de texto processada por modelos de IA |
+| **Embedding** | Representação vetorial de texto para busca semântica |
 
 ---
 
@@ -66,40 +74,50 @@ Agendamento:
 | **SLA** | Service Level Agreement |
 | **KPI** | Key Performance Indicator |
 | **NPS** | Net Promoter Score |
-| **CAC** | Customer Acquisition Cost |
-| **LTV** | Lifetime Value |
-| **MRR** | Monthly Recurring Revenue |
-| **MTTR** | Mean Time To Recovery |
-
----
-
-## Conceitos do Sistema
-
-| Conceito | Definição |
-|----------|-----------|
-| **{{CONCEITO_1}}** | {{DEFINICAO_1}} |
-| **{{CONCEITO_2}}** | {{DEFINICAO_2}} |
-
-<!--
-Adicione conceitos específicos do seu sistema.
-
-Exemplo:
-- Missão: Campanha de prospecção com configurações específicas
-- Lead: Potencial cliente identificado pelo sistema
-- Outreach: Ação de contato com um lead
--->
+| **RBAC** | Role-Based Access Control |
+| **CRM** | Customer Relationship Management |
+| **WIP** | Work In Progress |
+| **IA** | Inteligência Artificial |
+| **GPT** | Generative Pre-trained Transformer |
+| **LLM** | Large Language Model |
 
 ---
 
 ## Status e Estados
 
+### Contatos
+
+| Estado | Significado |
+|--------|-------------|
+| **Ativo** | Contato com atividade recente |
+| **Inativo** | Sem atividade há mais de 30 dias |
+| **Bloqueado** | Contato impedido de receber mensagens automáticas |
+
+### Deals
+
 | Estado | Significado | Cor |
 |--------|-------------|-----|
-| **Draft** | Em rascunho, não publicado | ⚪ |
-| **Active** | Ativo e em operação | 🟢 |
-| **Paused** | Pausado temporariamente | 🟡 |
-| **Completed** | Finalizado com sucesso | ✅ |
-| **Failed** | Falhou ou foi cancelado | 🔴 |
+| **Open** | Deal em andamento | 🔵 |
+| **Won** | Deal ganho/fechado | 🟢 |
+| **Lost** | Deal perdido | 🔴 |
+
+### Follow-ups
+
+| Estado | Significado |
+|--------|-------------|
+| **Pending** | Aguardando envio |
+| **Sent** | Enviado com sucesso |
+| **Responded** | Contato respondeu |
+| **Failed** | Falha no envio |
+| **Cancelled** | Cancelado (contato respondeu antes) |
+
+### Flows
+
+| Estado | Significado |
+|--------|-------------|
+| **Draft** | Rascunho, não executável |
+| **Active** | Publicado e executando |
+| **Paused** | Pausado temporariamente |
 
 ---
 
@@ -114,14 +132,15 @@ Exemplo:
 
 ---
 
-## Métricas Comuns
+## Métricas do Produto
 
 | Métrica | Definição | Como Calcular |
 |---------|-----------|---------------|
-| **Taxa de Conversão** | % de usuários que completam ação | (Conversões / Visitantes) × 100 |
-| **Churn Rate** | % de usuários que abandonam | (Cancelamentos / Total) × 100 |
-| **NPS** | Satisfação do cliente | % Promotores - % Detratores |
-| **ARPU** | Receita por usuário | Receita Total / Usuários Ativos |
+| **Taxa de Resposta** | % de mensagens respondidas | (Respondidas / Recebidas) × 100 |
+| **Tempo de Resposta** | Tempo médio até primeira resposta | Média(timestamp_resposta - timestamp_mensagem) |
+| **Taxa de Automação** | % de respostas geradas por IA | (Respostas IA / Total Respostas) × 100 |
+| **Win Rate** | % de deals ganhos | (Deals Won / Total Deals) × 100 |
+| **Conversão de Estágio** | % de contatos que avançam | (Avançaram / Total no Estágio) × 100 |
 
 ---
 

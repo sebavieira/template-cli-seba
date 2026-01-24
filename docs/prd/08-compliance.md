@@ -1,7 +1,7 @@
 # 8. Compliance e Políticas
 
 **Versão:** 1.0.0
-**Última Atualização:** {{DATA}}
+**Última Atualização:** 2026-01-19
 
 [← Voltar para Índice PRD](README.md)
 
@@ -44,53 +44,79 @@
 
 | Dado | Finalidade | Base Legal | Retenção |
 |------|------------|------------|----------|
-| {{DADO_1}} | {{FINALIDADE_1}} | {{BASE_1}} | {{RETENCAO_1}} |
-| {{DADO_2}} | {{FINALIDADE_2}} | {{BASE_2}} | {{RETENCAO_2}} |
-| {{DADO_3}} | {{FINALIDADE_3}} | {{BASE_3}} | {{RETENCAO_3}} |
+| **Nome e Email** | Identificação e comunicação | Execução de contrato | Duração da conta |
+| **Telefone (WhatsApp)** | Conexão de instância | Consentimento | Duração da instância |
+| **Conversas WhatsApp** | CRM e histórico | Execução de contrato | Configurável (30-365 dias) |
+| **Dados de Contatos** | Gestão de relacionamento | Legítimo interesse | Duração da conta |
+| **Logs de Acesso** | Segurança e auditoria | Obrigação legal | 6 meses |
+| **Métricas de Uso** | Melhoria do produto | Legítimo interesse | Anonimizado após 12 meses |
 
 ---
 
-## 8.2 Políticas por Canal (Se Aplicável)
+## 8.2 Políticas por Canal
 
-### Email
+### WhatsApp (Canal Principal)
+
+**Compliance com Meta Business Policies:**
+
+| Requisito | Implementação | Status |
+|-----------|---------------|--------|
+| Opt-in explícito | Contato deve iniciar conversa ou consentir | ✅ |
+| Templates aprovados | Suporte a templates HSM | 📋 Planejado |
+| Janela de 24h | Respostas apenas dentro da janela | ✅ |
+| Bloqueio de spam | Rate limiting e monitoramento | ✅ |
+| Identificação clara | Nome da empresa visível | ✅ |
+
+**Limitações Técnicas:**
+
+- Máximo de 1.000 mensagens/dia por instância (Evolution API)
+- Templates obrigatórios para iniciar conversas (Business API)
+- Janela de 24h para respostas após última mensagem do contato
+- Proibido envio em massa sem consentimento
+
+### Email (Notificações do Sistema)
 
 - Compliance com CAN-SPAM / LGPD
 - Opt-out em todas as mensagens
 - Identificação clara do remetente
 - Assunto não enganoso
-
-### WhatsApp
-
-- Compliance com Meta Business Policies
-- Uso de templates aprovados
-- Janela de 24h para respostas
-- Opt-in explícito obrigatório
-
-### SMS (Se Aplicável)
-
-- Compliance com ANATEL
-- Horário de envio respeitado
-- Opt-out via PARE
+- Usado apenas para notificações do sistema (não marketing)
 
 ---
 
 ## 8.3 Segurança de Dados
 
-### Dados Sensíveis
+### Classificação de Dados
 
 | Dado | Classificação | Proteção |
 |------|---------------|----------|
-| Senhas | Crítico | Hash bcrypt, nunca armazenado em texto |
-| Tokens | Crítico | Criptografado, expiração curta |
-| Dados pessoais | Alto | Criptografia em repouso |
-| Logs | Médio | Retenção limitada, sem PII |
+| **Senhas** | Crítico | Hash bcrypt (10 rounds), nunca armazenado em texto |
+| **JWT Tokens** | Crítico | Expiração curta (15min access, 7d refresh) |
+| **API Keys WhatsApp** | Crítico | Criptografado em repouso, acesso restrito |
+| **Conversas** | Alto | Isolamento multi-tenant, sem acesso entre empresas |
+| **Dados de Contato** | Alto | Isolamento por empresa, backup criptografado |
+| **Prompts IA** | Médio | Armazenado por empresa, sem compartilhamento |
+| **Logs** | Médio | Retenção 6 meses, sem PII em logs públicos |
 
 ### Controles de Acesso
 
-- Autenticação obrigatória
-- Autorização por roles
-- Audit trail de acessos
-- Sessões com timeout
+| Controle | Implementação |
+|----------|---------------|
+| Autenticação | JWT obrigatório para todas as rotas protegidas |
+| Autorização | RBAC (owner, admin, member) por recurso |
+| Isolamento | Multi-tenant com companyId em todas as queries |
+| Audit Trail | Log de ações sensíveis (login, exclusão, alteração) |
+| Sessões | Timeout configurável, invalidação remota |
+| Rate Limiting | 100 requests/min por IP |
+
+### Criptografia
+
+| Camada | Tecnologia |
+|--------|------------|
+| **Em trânsito** | TLS 1.3 (HTTPS obrigatório) |
+| **Em repouso** | PostgreSQL com encryption at rest |
+| **Senhas** | bcrypt com salt único |
+| **Tokens** | JWT com assinatura HS256/RS256 |
 
 ---
 
@@ -98,21 +124,114 @@
 
 ### Documentos Necessários
 
-- [ ] Termos de Uso
-- [ ] Política de Privacidade
+- [x] Termos de Uso
+- [x] Política de Privacidade
 - [ ] Política de Cookies (se aplicável)
-- [ ] SLA (se aplicável)
+- [ ] SLA para planos pagos
 
-### Checklist de Compliance
+### Conteúdo da Política de Privacidade
 
-- [ ] Consentimento implementado
-- [ ] Mecanismo de opt-out funcional
-- [ ] Exportação de dados disponível
-- [ ] Exclusão de dados implementada
-- [ ] Política de privacidade publicada
-- [ ] Logs de auditoria ativos
-- [ ] Criptografia configurada
-- [ ] Backup de dados ativo
+1. **Identificação do Controlador**
+   - Nome da empresa
+   - CNPJ
+   - Endereço
+   - Contato do DPO
+
+2. **Dados Coletados**
+   - Dados de cadastro
+   - Dados de uso
+   - Dados de terceiros (contatos WhatsApp)
+
+3. **Finalidades do Tratamento**
+   - Prestação do serviço
+   - Comunicação
+   - Melhoria do produto
+   - Segurança
+
+4. **Compartilhamento**
+   - Provedores de infraestrutura
+   - APIs de terceiros (OpenAI, Evolution)
+   - Não venda de dados
+
+5. **Direitos do Titular**
+   - Acesso
+   - Correção
+   - Exclusão
+   - Portabilidade
+   - Revogação de consentimento
+
+---
+
+## 8.5 Checklist de Compliance
+
+### LGPD
+
+- [x] Política de privacidade redigida
+- [x] Consentimento implementado no cadastro
+- [x] Mecanismo de opt-out funcional
+- [ ] Exportação de dados disponível (endpoint planejado)
+- [x] Exclusão de dados implementada (soft delete + hard delete)
+- [x] Logs de auditoria ativos
+- [x] Isolamento multi-tenant
+
+### Segurança
+
+- [x] HTTPS obrigatório em produção
+- [x] Senhas com hash bcrypt
+- [x] JWT com expiração curta
+- [x] Rate limiting configurado
+- [x] Headers de segurança (Helmet)
+- [x] Validação de input (Zod)
+- [x] CORS configurado por ambiente
+- [ ] Pentesting realizado
+
+### WhatsApp
+
+- [x] Conexão via QR Code (user-initiated)
+- [x] Respeito à janela de 24h
+- [x] Bloqueio manual de contatos
+- [x] Opt-out funcional para contatos
+- [ ] Templates HSM (planejado)
+
+---
+
+## 8.6 Incidentes de Segurança
+
+### Protocolo de Resposta
+
+1. **Detecção** (< 1h)
+   - Monitoramento de logs
+   - Alertas automáticos
+   - Relatórios de usuários
+
+2. **Contenção** (< 4h)
+   - Isolamento do sistema afetado
+   - Revogação de tokens comprometidos
+   - Bloqueio de IPs suspeitos
+
+3. **Investigação** (< 24h)
+   - Análise de logs
+   - Identificação da causa raiz
+   - Avaliação de impacto
+
+4. **Notificação** (< 72h)
+   - Usuários afetados
+   - ANPD (se dados pessoais)
+   - Autoridades competentes
+
+5. **Correção**
+   - Patch de vulnerabilidade
+   - Atualização de procedimentos
+   - Documentação do incidente
+
+### Contatos de Emergência
+
+| Papel | Responsabilidade |
+|-------|------------------|
+| **Tech Lead** | Coordenação técnica |
+| **DPO** | Comunicação regulatória |
+| **Jurídico** | Avaliação legal |
+| **Comunicação** | Notificação a usuários |
 
 ---
 
